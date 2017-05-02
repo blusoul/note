@@ -1,2 +1,16 @@
-# note
-学习笔记与总结
+# study blog
+
+包括 template & js & css 相关学习笔记
+
+## 模板
+
+    tools: pug & handlebars
+
+## css
+
+    tools: stylus & sass
+
+## js
+
+    tools: lodash
+    native js: 类型介绍，排序算法，高级函数，设计模式
