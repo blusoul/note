@@ -1,6 +1,6 @@
 # code note
 
-包括 template & js & css 相关学习笔记
+包括 template & css & js 相关学习笔记
 
 ## 模板
 
