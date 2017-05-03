@@ -14,6 +14,23 @@
 
 * [博雅地名分享网](http://www.tcmap.com.cn/)
 
+## VSCode 调试配置文件 launch.json
+
+```json
+{
+  // Use IntelliSense to learn about possible Node.js debug attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [{
+    "type": "node",
+    "request": "launch",
+    "name": "启动程序",
+    "program": "${workspaceRoot}\\note\\code-share\\zoning-data\\index.js"
+  }]
+}
+```
+
 ## 提示：
 
     县级以上区划代码：以民政部 2017/02 区划代码为准
