@@ -2,6 +2,8 @@
 
 ## 数据来源：
 
+* [中华人民共和国国家统计局-2015年统计用区划代码和城乡划分代码(截止2015年09月30日)](http://www.stats.gov.cn/tjsj/tjbz/tjyqhdmhcxhfdm/2015/index.html)
+
 * [中华人民共和国民政部-搜索](http://s.mca.gov.cn/Search.jsp)
 
 * [中华人民共和国民政部-中华人民共和国行政区划代码](http://www.mca.gov.cn/article/sj/tjbz/a/)
@@ -18,9 +20,6 @@
 
 ```json
 {
-  // Use IntelliSense to learn about possible Node.js debug attributes.
-  // Hover to view descriptions of existing attributes.
-  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
   "version": "0.2.0",
   "configurations": [{
     "type": "node",

@@ -41,3 +41,6 @@ js/react-redux/
 
 # other
 other/
+
+# VSCode
+.vscode/
