@@ -94,7 +94,7 @@ DOM 事件流中实际的目标在捕获阶段不会接收到事件，处理目�
 每个元素（包括 window 和 document)都有自己的事件处理程序属性，**这些属性通常小写**，将这些属性的值设置为一个函数，就可以指定事件处理程序。
 
 ```js
-var btn = document.getElementById('myBtn);
+var btn = document.getElementById('myBtn');
 btn.onclick = function() {
   console.log(this.id);
 }
@@ -348,13 +348,13 @@ DOM0 级方法添加事件处理程序时，event 对象作为 window 对象的�
 如果时使用 attachEvent() 添加的，那么就有一个 event 对象作为参数被传入事件处理程序函数中，也可以通过 window 对象访问 event 对象
 
 ```js
-var btn = document.getElementById('btn);
+var btn = document.getElementById('btn');
 btn.onclick = function() {
   var event = window.event;
   console.log(event.type);
 };
 
-btn.attachEvent('onclick',function(event) {
+btn.attachEvent('onclick', function(event) {
   console.log(event.type + '--attach');
 });
 
