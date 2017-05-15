@@ -243,7 +243,7 @@ event 对象包含与创建它的特定事件有关的属性和方法。
 
 * type： 只读， String，被触发的事件的类型
 
-* trusted: 只读，Boolean，为 true 表示事件是浏览器生成的，为 false 表示通过 Javascript 自定义的方法(DOM3 新增)
+* isTrusted: 只读，Boolean，为 true 表示事件是用户触发，为 false 表示通过 Javascript 创建触发或者 dispatchEvent 触发(DOM3 新增)
 
 #### currentTarget & target
 
