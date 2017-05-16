@@ -1,0 +1,44 @@
+div {
+    width: 100px;
+    height: 100px;
+    padding: 25px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    background-color: #9a7;
+}
+
+span {
+    display: block;
+    height: 100%;
+    width: 100%;
+    background: #9af;
+}
+
+.border-test1 {
+    border-radius: 50%;
+}
+
+.border-test2 {
+    border-radius: 100% 0 0 0;
+}
+
+.border-test3 {
+    border-top-left-radius: 20% 40%;
+}
+
+.border-test4 {
+    border-radius: 20% 40% 20% 40% / 20% 40% 20% 40%;
+}
+
+.border-inherit {
+    border-radius: inherit;
+}
+
+.border-test4:last-child {
+    border-radius: initial;
+}
+
+.border-test5 {
+    outline: 2px solid #9fa;
+    box-shadow: 4px 4px 8px #afe;
+}
