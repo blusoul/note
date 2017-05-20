@@ -90,4 +90,5 @@
     console.log(event.type);
   };
 
+
 })(window, document);
