@@ -638,8 +638,107 @@ touchend 事件发生时, touches 集合中没有了 Touch 对象, 因为不存�
 
 ## 模拟事件
 
-事件经常由用户操作或者通过其他浏览器功能来触发
+事件经常由用户操作或者通过其他浏览器功能来触发。DOM2 级规范规定了模拟特定事件的方式。 IE9 等都支持这种方式。IE 有它自己的模拟事件的方式。
 
 ### DOM 中的事件模拟
 
-可以使用 DOM
+可以在 document 对象上使用 createEvent() 方法创建这些 event 对象。整个方法接受一个参数，即表示要创建的事件类型的字符串。在 DOM2 级中，所有的这些字符串都使用英文的复数形式， 而在 DOM3 级中都变成了单数。
+
+1. UIEvents: 一般化的 UI 事件。鼠标事件和键盘事件都继承自 UI 事件。 DOM3 级是 UIEvent。
+
+1. MouseEvents: 一般化的鼠标事件。DOM3 级中是 MouseEvent。
+
+1. MutationEvents: 一般化的 DOM 变动事件。DOM3 级中是 MutationEvent。
+
+1. HTMLEvents: 一般化的 HTML 事件。没有 对应的 DOM3 级事件，都被分散到其他的类别中
+
+触发模拟事件的方法， dispatchEvent() , 调用时需要传入一个参数，即表示要触发事件的 evnet 对象
+
+#### 模拟鼠标事件
+
+创建鼠标事件对象的方法是为 createEvent() 传入字符串 “MouseEvents"。返回的对象有一个名为 initMouseEvent() 的方法，用于指定与该鼠标事件的有关信息。整个方法接受 15 个参数。分别与鼠标事件的每个典型的属性一一对应。
+
+    type, bubbles, cancelable, view(设置为 document.defaultView), detail, screenX, screenY, clientX, clientY, ctrlKey, altKey, shiftKey, metaKey, button, relatedTarget
+
+其中，前 4 个参数对正确激发事件至关重要，剩余的参数在事件处理程序才用到， 当把 event 对象传给 dispatchEvent() 方法时，整个对象的 target 属性会自动设置。
+
+```js
+var btn = document.getElementById('myBtn');
+
+// 创建事件对象
+var event = document.createEvent('MouseEvents');
+
+// 初始化事件对象
+event.initMouseEvent('click', true, true, document.defaultView, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+
+// 触发事件
+btn.dispatchEvent(event);
+```
+
+#### 模拟键盘事件
+
+DOM3 级规定，调用 createEvent() 并传入“KeyboardEvent”就可以创建一个键盘事件，返回的对象也会包含一个 initKeyEvent() 方法，这个方法接受下列参数
+
+    type, bubbles, cancelable, view, key(按下键的键码), location(按了哪里的键), modifiers(空格分隔的修改键列表), repeat(在一行中按这个键多少次)
+
+DOM3 级不提倡使用 keypress 事件，因此只能模拟 keydown 和 keyup.
+
+FireFox 中，调用 createEvent() 并传入 “KeyEvents” 创建键盘事件。返回的事件对象包含一个 initKeyEvent() 方法，接受 10 个参数
+
+    type, bubbles, cancelable, view, ctrlKey, altKey, shiftKey, metaKey, keyCode, charCode
+
+在其他浏览器中，则需要创建一个通用的事件，然后再向事件对象添加键盘特有的信息
+
+```js
+var textBox = document.getElementById('myTextBox');
+var event = document.createEvent('Events);
+
+//初始化事件对象
+event.initEvent(type, bubbles, cancelable);
+event.view = document.defaultView;
+event.altKey = false;
+event.ctrlKey = false;
+event.shiftKey = false;
+event.metaKey = false;
+event.keyCode = 65;
+event.charCode = 65;
+
+textBox.dispatchEvent(event);
+```
+
+#### 自定义 DOM 事件
+
+自定义 DOM 事件，不是由 DOM 原生触发，目的是让开发人员创建自己的事件。要创建自定义事件，可以调用 createEvent('CustomEvent'),返回的对象有一个 initCustomEvent() 方法，接受 4 个参数
+
+    type, bubbles, cancelable, detail(对象， 任意值， 保存在 event 对象的 detail 属性中)
+
+```js
+var div = document.createEvent('CustomEvent');
+var event;
+
+div.addEventListener('myevent', function(event) {
+  console.log(event.detail)
+},false);
+
+if (document.implementation.hasFeature('CustomEvent', '3.0')) {
+  event = document.createEvent('CustomEvent');
+  event.initCustomEvent('myevent', true, false, 'hello');
+  event.dispatchEvent(event)
+}
+```
+
+### IE 的事件模拟
+
+IE8 及之前的版本，先创建 event 对象，然后为其指定相应的信息，再触发对象, 调用 document.createEventObject() 创建 event 对象，再为 event 对象添加信息，最后通过 fireEvent() 方法触发，接受两个参数： 事件处理程序的名称和 event 对象。
+
+```js
+var textbox = document.getElementById('textbox');
+
+var event = document.createEventObject();
+event.altKey = false;
+event.ctrlKey = false;
+event.shiftKey =false;
+event.keyCode = 65;
+
+textbox.fireEvent('onkeypress', event);
+```
