@@ -691,7 +691,7 @@ FireFox 中，调用 createEvent() 并传入 “KeyEvents” 创建键盘事件�
 
 ```js
 var textBox = document.getElementById('myTextBox');
-var event = document.createEvent('Events);
+var event = document.createEvent('Events');
 
 //初始化事件对象
 event.initEvent(type, bubbles, cancelable);
