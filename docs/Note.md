@@ -49,7 +49,7 @@ function hashCode() {
 }
 ```
 
-2. onload 只是加载完成，图片还未  解码渲染，插入页面会卡顿，decode 完成之后插入页面加上 requestAnimationFrame 避免丢帧
+2. onload 只是加载完成，图片还未  解码渲染，插入页面会卡顿，可以在 image decode 完成之后插入页面加上 requestAnimationFrame 避免丢帧
 
 ```javascript
     // decode 返回一个thenable
@@ -60,6 +60,10 @@ function hashCode() {
     }).catch((err)=>{
     })
 ```
+
+## 在线示例
+
+[图片加载示例](https://codepen.io/blusoul/pen/RvPdeJ)
 
 ## 参考
 
