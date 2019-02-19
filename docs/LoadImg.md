@@ -6,7 +6,7 @@
 
    方法一：每次重新 new 一个 Image 对象，或者 src 增加版本号，但是这样的影响是，Image 对象不能共用造成浪费，或者相同图片要多次加载不能更好的利用缓存
 
-   方法二：只需要一个 Image 对象，对 onload 成功的图片地址进行缓存，也可以对图片地址  的 hash 进行缓存 ![Demo](https://codepen.io/blusoul/pen/RvPdeJ?editors=1010)
+   方法二：只需要一个 Image 对象，对 onload 成功的图片地址进行缓存，也可以对图片地址  的 hash 进行缓存
 
 ```javascript
 // 相同src不会触发onload
