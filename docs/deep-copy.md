@@ -51,8 +51,10 @@
 
   ```javascript
   function deepClone(obj) {
+    return new Promise(resolve)
     const {port1, port2} = new ChannelMessage();
-    port2.onmessage(()=>)
+    port2.onmessage((ev)=> resolve(ev.data));
+    port1.postMessage(obj)
   }
   ```
 
@@ -61,3 +63,16 @@
 
 
   1. IndexedDB
+
+
+测试结果来源 [test-Surma](https://deep-copy.glitch.me/)
+
+![测试结果](../img/deep-copy-js-perf.png)
+
+引用来源
+
+* [MDN 结构化克隆算法](https://developer.mozilla.org/zh-CN/docs/Web/Guide/API/DOM/The_structured_clone_algorithm)
+
+* [twitter-Surma](https://twitter.com/DasSurma/status/955490070076776448)
+
+* [test-Surma](https://deep-copy.glitch.me/)
