@@ -37,11 +37,11 @@ const loadImg = (() => {
 hasCode 方法
 
 ```javascript
-function hashCode() {
+function hashCode(str) {
   var hash = 0;
-  if (this.length == 0) return hash;
-  for (i = 0; i < this.length; i++) {
-    char = this.charCodeAt(i);
+  if (str.length == 0) return hash;
+  for (i = 0; i < str.length; i++) {
+    char = str.charCodeAt(i);
     hash = (hash << 5) - hash + char;
     hash = hash & hash; // Convert to 32bit integer
   }
@@ -75,8 +75,8 @@ img
 
 [whatwg dom-image](https://html.spec.whatwg.org/multipage/embedded-content.html#dom-image)
 
-https://www.samanthaming.com/tidbits
+[](https://www.samanthaming.com/tidbits)
 
-https://kangax.github.io/compat-table/es6/
+[compat-table](https://kangax.github.io/compat-table/es6/)
 
-https://www.ecma-international.org/ecma-262/9.0/index.html#sec-memory-model-fundamentals
+[](https://www.ecma-international.org/ecma-262/9.0/index.html#sec-memory-model-fundamentals)

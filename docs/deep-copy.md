@@ -76,3 +76,5 @@
 * [twitter-Surma](https://twitter.com/DasSurma/status/955490070076776448)
 
 * [test-Surma](https://deep-copy.glitch.me/)
+
+* [JavaScript 深拷贝性能分析](https://justjavac.com/javascript/2018/02/02/deep-copy.html)
