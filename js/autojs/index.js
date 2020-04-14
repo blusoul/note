@@ -80,9 +80,12 @@ function mainLayout() {
 
   // 自动报单
   ui.record_btn.on('click', () => {
-    threads.start(function () {
-      launchApp('菜鸟裹裹');
-      setTimeout(getBtn, 3000);
+    dialogs.rawInput('请输入查询距今几天', '', function (value) {
+      DAY = +(value || 0);
+      threads.start(function () {
+        launchApp('菜鸟裹裹');
+        setTimeout(getBtn, 3000);
+      });
     });
   });
 
@@ -235,10 +238,11 @@ mainLayout();
 const CURRENT_NUM = 1;
 let CARD_LIST = [];
 let ERROR_CARD_LIST = [];
-const DAY = 3;
+let DAY = 1;
 const data = {};
 var password = '';
 const date = new Date().toLocaleDateString();
+let times = 1;
 
 let couponList = [];
 let currentIndex = 0;
@@ -336,13 +340,35 @@ function record() {
           i++;
           return setTimeout(loop, 500);
         }
-        const date1 = id('feeds_item_date_day_tv').findOne().text();
-        const no = id('mailno_textview').findOne().text();
-        if (compareTime(date1)) {
-          flag = false;
-          writeFile();
-          return false;
+        click('点击查看更多物流详情');
+        sleep(100);
+        const dateList = id('feeds_item_date_day_tv').find();
+        const timeList = id('feeds_item_date_time_tv').find();
+        const date = dateList[dateList.length - 1].text();
+        const time = timeList[timeList.length - 1].text();
+        const date1 =
+          date.indexOf('-') === -1
+            ? date === '昨天'
+              ? new Date().getMonth() + 1 + '-' + (new Date().getDate() - 1)
+              : new Date().getMonth() + 1 + '-' + (new Date().getDate() - 1)
+            : date;
+
+        const noStr = id('mailno_textview').findOne().text();
+        const no = noStr.indexOf('丹鸟') > -1 ? noStr.split(' ')[1] : noStr;
+        if (compareTime(date1 + ' ' + time)) {
+          times += 1;
+          if (times > 5) {
+            writeFile();
+            return false;
+          } else {
+            return evaluationFn(() => {
+              back();
+              i++;
+              setTimeout(loop, 500);
+            });
+          }
         }
+        times = 1;
         if (data[key]) {
           if (data[key].indexOf(no) === -1) {
             data[key].push(no);
