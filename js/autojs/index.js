@@ -272,10 +272,14 @@ function getBtn() {
 }
 
 function compareTime(str) {
+  const year = new Date().getFullYear();
+  const month = new Date().getMonth() + 1;
+  const date = new Date().getDate();
   const cur = new Date().getFullYear() + '-' + str;
+
   return (
     +new Date(cur.replace(/-/g, '/')) <
-    new Date(new Date().toISOString().split('T')[0]) - DAY * 86400000 - 1000
+    +new Date(year + '/' + month + '/' + date) - DAY * 24 * 60 * 60 * 1000
   );
 }
 
@@ -327,12 +331,11 @@ function record() {
   function loop() {
     const item = list[i];
     if (item && i < len) {
-      const key = item
-        .findOne(id('package_info_item_r2'))
-        .text()
-        .split('|')[1]
+      const text = item.findOne(id('package_info_item_r2')).text();
+      const key = (text.indexOf('|') > -1 ? text.split('|')[1] : text)
         .trim()
         .replace('【亲友】的', '');
+
       item.click();
       setTimeout(() => {
         if (!id('mailno_textview').exists()) {
